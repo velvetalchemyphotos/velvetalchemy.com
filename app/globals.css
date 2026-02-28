@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'Mattone';
+  src: url('/fonts/Mattone-Regular.woff2') format('woff2'),
+       url('/fonts/Mattone-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mattone';
+  src: url('/fonts/Mattone-Bold.woff2') format('woff2'),
+       url('/fonts/Mattone-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Mattone';
+  src: url('/fonts/Mattone-Black.woff2') format('woff2'),
+       url('/fonts/Mattone-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply font-poppins text-black bg-white overflow-x-hidden;
+  }
+
+  * {
+    @apply box-border;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block bg-black text-white rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-pink hover:text-black cursor-pointer;
+  }
+
+  .btn-outline {
+    @apply inline-block border border-white text-white rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-white hover:text-black cursor-pointer;
+  }
+
+  .btn-outline-black {
+    @apply inline-block border border-black text-black rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-black hover:text-white cursor-pointer;
+  }
+
+  .section-padding {
+    @apply px-[122px] md:px-6;
+  }
+
+  .mattone-heading {
+    @apply font-mattone uppercase;
+  }
+
+  .cormorant-heading {
+    @apply font-cormorant italic;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFCCF1;
+  border-radius: 3px;
+}
+
+/* Marquee animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 120s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 30s linear infinite;
+}
+
+.animate-gallery-scroll {
+  animation: marquee-left 80s linear infinite;
+}
