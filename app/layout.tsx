@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Poppins, Instrument_Serif } from 'next/font/google'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import EmailPopup from '@/components/ui/EmailPopup'
@@ -50,6 +51,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <EmailPopup />
+        <Analytics />
       </body>
     </html>
   )
