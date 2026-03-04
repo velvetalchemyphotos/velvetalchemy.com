@@ -3,14 +3,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import TestimonialSlider from '@/components/ui/TestimonialSlider'
 import Marquee from '@/components/ui/Marquee'
-import { testimonials, blogPosts, heroImages, galleryImages } from '@/lib/data'
+import { testimonials, blogPosts, heroImages, galleryImages, heroSmallImages } from '@/lib/data'
 import { fadeIn, slideInUp } from '@/lib/animations'
 import type { Variants } from 'framer-motion'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
 
 
 function AnimatedSection({ children, className = '', variants = fadeIn, style }: {
@@ -36,64 +34,134 @@ function AnimatedSection({ children, className = '', variants = fadeIn, style }:
 }
 
 
-// Portrait card dimensions — matched to reference site (503×683px at top:129px on 1728px viewport)
-const CARD_W = 503
-const CARD_H = 683
-const CARD_TOP = 129
 const HERO_MARQUEE_TEXT = 'VELVET ALCHEMY ✦ VELVET ALCHEMY ✦ VELVET ALCHEMY ✦ VELVET ALCHEMY ✦ VELVET ALCHEMY ✦ VELVET ALCHEMY ✦ '
 
-// Hero: static black section, portrait card centered, marquee running over it.
-// A gradient at the bottom fades black → white into the next section.
-function HeroCarousel() {
-  const [emblaRef] = useEmblaCarousel(
-    { loop: true },
-    [Autoplay({ delay: 3500, stopOnInteraction: false })]
-  )
+// Scattered image positions for stage 3
+const SMALL_IMAGE_POSITIONS = [
+  { top: '5%', left: '3%', width: 250, height: 170 },
+  { top: '8%', right: '5%', width: 200, height: 280 },
+  { bottom: '15%', left: '8%', width: 280, height: 200 },
+  { bottom: '10%', right: '3%', width: 220, height: 300 },
+  { top: '35%', left: '1%', width: 180, height: 240 },
+  { bottom: '5%', left: '38%', width: 200, height: 150 },
+  { top: '3%', right: '30%', width: 170, height: 220 },
+]
+
+// Hero: 3-stage scroll animation
+// Stage 1: Portrait card on black + marquee
+// Stage 2: Large background image fades in behind portrait
+// Stage 3: Background fades out, scattered small images fade in
+function HeroSection() {
+  const heroRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  })
+
+  // Marquee text — visible throughout
+  const marqueeOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1])
+
+  // Portrait card — slight shrink over time
+  const portraitScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
+
+  // Stage 2: Large background image fades in then out
+  const bgImageOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.5, 0.58], [0, 1, 1, 0])
+
+  // Stage 3: Scattered small images fade in
+  const smallImagesOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
+
+  // Entire content fades out at the very end
+  const contentOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0])
 
   return (
-    <div className="relative bg-black overflow-hidden" style={{ height: `${CARD_TOP + CARD_H + 140}px` }}>
+    <section ref={heroRef} className="relative" style={{ height: '650vh' }}>
+      {/* Black background that fades to white at the bottom */}
+      <div className="absolute inset-0" style={{
+        background: 'linear-gradient(to bottom, #000 85%, #fff 100%)',
+      }} />
 
-      {/* Portrait carousel card */}
-      <div
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{ top: CARD_TOP, width: CARD_W, height: CARD_H, zIndex: 1 }}
-      >
-        <div className="overflow-hidden w-full h-full" ref={emblaRef}>
-          <div className="flex h-full">
-            {heroImages.map((src, i) => (
-              <div key={i} className="relative flex-shrink-0 w-full h-full">
-                <Image
-                  src={src}
-                  alt={`Hero slide ${i + 1}`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="503px"
-                  priority={i === 0}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Sticky container — stays fixed while scrolling */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ zIndex: 1 }}>
+        <motion.div className="w-full h-full relative" style={{ opacity: contentOpacity }}>
 
-      {/* Marquee running in front of portrait */}
-      <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none" style={{ zIndex: 2 }}>
-        <div className="flex animate-marquee-left whitespace-nowrap">
-          <span
-            className="font-mattone text-white uppercase leading-none select-none"
-            style={{ fontSize: 'clamp(80px, 10vw, 140px)', letterSpacing: '0.3em' }}
+          {/* Layer 1 (z:1): Scattered small images — stage 3 */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            style={{ zIndex: 1, opacity: smallImagesOpacity }}
           >
-            {HERO_MARQUEE_TEXT}
-          </span>
-        </div>
-      </div>
+            {heroSmallImages.map((src, i) => {
+              const pos = SMALL_IMAGE_POSITIONS[i]
+              return (
+                <div
+                  key={i}
+                  className="absolute overflow-hidden rounded-lg"
+                  style={{
+                    ...pos,
+                    width: pos.width,
+                    height: pos.height,
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={`Detail ${i + 1}`}
+                    fill
+                    className="object-cover"
+                    sizes={`${pos.width}px`}
+                  />
+                </div>
+              )
+            })}
+          </motion.div>
 
-      {/* Gradient fade: black → white at the bottom, blending into the next section */}
-      <div
-        className="absolute bottom-0 left-0 w-full pointer-events-none"
-        style={{ height: 200, background: 'linear-gradient(to bottom, transparent, #ffffff)', zIndex: 3 }}
-      />
-    </div>
+          {/* Layer 2 (z:2): Full-viewport background image — stage 2 */}
+          <motion.div
+            className="absolute inset-0"
+            style={{ zIndex: 2, opacity: bgImageOpacity }}
+          >
+            <Image
+              src={heroImages[3]}
+              alt="Background hero"
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          </motion.div>
+
+          {/* Layer 3 (z:3): Marquee text */}
+          <motion.div
+            className="absolute inset-0 flex items-center overflow-hidden pointer-events-none"
+            style={{ zIndex: 3, opacity: marqueeOpacity }}
+          >
+            <div className="flex animate-marquee-left whitespace-nowrap">
+              <span
+                className="font-mattone text-white uppercase leading-none select-none"
+                style={{ fontSize: 'clamp(80px, 10vw, 140px)', letterSpacing: '0.3em' }}
+              >
+                {HERO_MARQUEE_TEXT}
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Layer 4 (z:4): Portrait card — centered, static */}
+          <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 4 }}>
+            <motion.div
+              className="relative"
+              style={{ scale: portraitScale, width: 503, height: 683 }}
+            >
+              <Image
+                src={heroImages[0]}
+                alt="Hero portrait"
+                fill
+                className="object-cover"
+                sizes="503px"
+                priority
+              />
+            </motion.div>
+          </div>
+
+        </motion.div>
+      </div>
+    </section>
   )
 }
 
@@ -123,7 +191,7 @@ export default function HomePage() {
   return (
     <main>
       {/* 1. HERO */}
-      <HeroCarousel />
+      <HeroSection />
 
       {/* 2. INTRO — Authentic Style — white bg, text + button only */}
       <section className="bg-white flex flex-col items-center text-center px-8 pt-16 pb-24 gap-8">

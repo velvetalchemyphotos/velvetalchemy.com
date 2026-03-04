@@ -62,6 +62,17 @@ export const galleryImages = [
   'https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2?w=1200&h=1600&fit=crop&q=80',
 ]
 
+// Scattered small images for hero stage 3
+export const heroSmallImages = [
+  'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=500&fit=crop&q=80', // wedding rings
+  'https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&h=500&fit=crop&q=80', // bride getting ready
+  'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=400&h=500&fit=crop&q=80', // bouquet toss
+  'https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=400&h=500&fit=crop&q=80', // couple sunset
+  'https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2?w=400&h=500&fit=crop&q=80', // wedding details
+  'https://images.unsplash.com/photo-1546032996-6dfacbacbf3f?w=400&h=500&fit=crop&q=80', // bride portrait
+  'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=500&fit=crop&q=80', // floral arrangement
+]
+
 export const instagramImages = [
   'https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&h=800&fit=crop&q=80',
   'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=800&fit=crop&q=80',
