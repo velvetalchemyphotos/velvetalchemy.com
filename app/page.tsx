@@ -74,7 +74,7 @@ function HeroSection() {
   const contentOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0])
 
   return (
-    <section ref={heroRef} className="relative" style={{ height: '650vh' }}>
+    <section ref={heroRef} className="relative hero-height">
       {/* Black background that fades to white at the bottom */}
       <div className="absolute inset-0" style={{
         background: 'linear-gradient(to bottom, #000 85%, #fff 100%)',
@@ -86,7 +86,7 @@ function HeroSection() {
 
           {/* Layer 1 (z:1): Scattered small images — stage 3 */}
           <motion.div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none md:hidden"
             style={{ zIndex: 1, opacity: smallImagesOpacity }}
           >
             {heroSmallImages.map((src, i) => {
@@ -134,8 +134,7 @@ function HeroSection() {
           >
             <div className="flex animate-marquee-left whitespace-nowrap">
               <span
-                className="font-mattone text-white uppercase leading-none select-none"
-                style={{ fontSize: 'clamp(80px, 10vw, 140px)', letterSpacing: '0.3em' }}
+                className="font-mattone text-white uppercase leading-none select-none hero-marquee-text"
               >
                 {HERO_MARQUEE_TEXT}
               </span>
@@ -146,14 +145,14 @@ function HeroSection() {
           <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 4 }}>
             <motion.div
               className="relative"
-              style={{ scale: portraitScale, width: 503, height: 683 }}
+              style={{ scale: portraitScale, width: 'clamp(260px, 70vw, 503px)', height: 'clamp(354px, 95vw, 683px)' }}
             >
               <Image
                 src={heroImages[0]}
                 alt="Hero portrait"
                 fill
                 className="object-cover"
-                sizes="503px"
+                sizes="(max-width: 768px) 70vw, 503px"
                 priority
               />
             </motion.div>
@@ -172,13 +171,13 @@ function GalleryStrip() {
     <div className="overflow-hidden">
       <div className="flex gap-3 animate-gallery-scroll" style={{ width: 'max-content' }}>
         {allImages.map((src, i) => (
-          <div key={i} className="relative flex-shrink-0 h-[550px] w-[300px]">
+          <div key={i} className="relative flex-shrink-0 h-[550px] md:h-[380px] w-[300px] md:w-[210px]">
             <Image
               src={src}
               alt={`Gallery ${i + 1}`}
               fill
               className="object-cover"
-              sizes="300px"
+              sizes="(max-width: 768px) 210px, 300px"
             />
           </div>
         ))}
@@ -194,11 +193,11 @@ export default function HomePage() {
       <HeroSection />
 
       {/* 2. INTRO — Authentic Style — white bg, text + button only */}
-      <section className="bg-white flex flex-col items-center text-center px-8 pt-16 pb-24 gap-8">
+      <section className="bg-white flex flex-col items-center text-center px-8 md:px-5 pt-16 md:pt-10 pb-24 md:pb-16 gap-8 md:gap-6">
         <AnimatedSection>
           <h1
             className="font-mattone uppercase text-black leading-[0.9]"
-            style={{ fontSize: 'clamp(60px, 10vw, 120px)', letterSpacing: '0.15em' }}
+            style={{ fontSize: 'clamp(44px, 10vw, 120px)', letterSpacing: '0.15em' }}
           >
             Forever<br />Yours
           </h1>
@@ -218,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. FILM & DIGITAL — full-width image with text overlay */}
-      <section className="relative w-full overflow-hidden" style={{ height: 550 }}>
+      <section className="relative w-full overflow-hidden fullwidth-section-height">
         <Image
           src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&h=700&fit=crop&q=80"
           alt="Film & Digital showcase"
@@ -227,17 +226,14 @@ export default function HomePage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className="font-mattone text-white uppercase leading-none"
-            style={{ fontSize: 'clamp(50px, 6vw, 65px)', letterSpacing: '0.3em' }}
-          >
+          <span className="font-mattone text-white uppercase leading-none overlay-heading">
             FILM &amp; DIGITAL
           </span>
         </div>
       </section>
 
       {/* 4. PHOTOGRAPHY — full-width image with centered text overlay */}
-      <section className="relative w-full overflow-hidden" style={{ height: 550 }}>
+      <section className="relative w-full overflow-hidden fullwidth-section-height">
         <Image
           src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1600&h=600&fit=crop&q=80"
           alt="Photography showcase"
@@ -246,10 +242,7 @@ export default function HomePage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className="font-mattone text-white uppercase leading-none"
-            style={{ fontSize: 'clamp(50px, 6vw, 65px)', letterSpacing: '0.3em' }}
-          >
+          <span className="font-mattone text-white uppercase leading-none overlay-heading">
             PHOTOGRAPHY
           </span>
         </div>
@@ -267,11 +260,10 @@ export default function HomePage() {
       </section>
 
       {/* 6. MEET THE PHOTOGRAPHER */}
-      <section className="flex md:flex-col" style={{ minHeight: 845 }}>
+      <section className="flex md:flex-col-reverse meet-section">
         {/* Left — black */}
         <div
-          className="flex flex-col justify-center px-16 md:px-8 py-20 gap-6 bg-black"
-          style={{ flex: '0 0 54%' }}
+          className="flex flex-col justify-center px-16 md:px-6 py-20 gap-6 bg-black meet-left"
         >
           <h2
             className="font-mattone text-white uppercase leading-[0.95]"
@@ -291,7 +283,7 @@ export default function HomePage() {
         </div>
 
         {/* Right — photo */}
-        <div className="relative md:h-[400px]" style={{ flex: '0 0 46%' }}>
+        <div className="relative md:h-[400px] meet-right">
           <Image
             src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=900&h=1200&fit=crop&q=80"
             alt="Photographer portrait"
@@ -334,7 +326,7 @@ export default function HomePage() {
               <p className="font-poppins text-[11px] uppercase tracking-[0.2em] text-black mb-2">
                 {post.category}
               </p>
-              <h3 className="font-cormorant text-[28px] text-black border-b border-black pb-3">
+              <h3 className="font-cormorant text-[28px] md:text-[22px] text-black border-b border-black pb-3">
                 {post.title}
               </h3>
             </AnimatedSection>
@@ -356,7 +348,7 @@ export default function HomePage() {
                 <p className="font-poppins text-[11px] uppercase tracking-[0.2em] text-black mb-2">
                   {post.category}
                 </p>
-                <h3 className="font-cormorant text-[28px] text-black border-b border-black pb-3">
+                <h3 className="font-cormorant text-[28px] md:text-[22px] text-black border-b border-black pb-3">
                   {post.title}
                 </h3>
               </AnimatedSection>

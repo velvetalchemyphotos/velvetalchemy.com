@@ -32,7 +32,7 @@ export default function Footer() {
       {/* Instagram Strip */}
       <div className="flex w-full overflow-hidden">
         {instagramImages.map((src, i) => (
-          <div key={i} className="relative flex-1 h-[200px]">
+          <div key={i} className="relative flex-1 h-[200px] md:h-[120px]">
             <Image
               src={src}
               alt={`Instagram ${i + 1}`}
@@ -45,7 +45,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Grid */}
-      <div className="grid grid-cols-4 md:grid-cols-2 gap-12 px-16 md:px-6 py-16">
+      <div className="grid grid-cols-4 md:grid-cols-2 gap-12 md:gap-8 px-16 md:px-6 py-16 md:py-10">
         {/* Main Pages */}
         <div>
           <h4 className="font-poppins text-[11px] uppercase tracking-[0.2em] text-black font-500 mb-6">
@@ -132,7 +132,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="flex justify-between items-center px-16 md:px-6 pb-8">
+      <div className="flex justify-between items-center px-16 md:px-6 pb-8 md:flex-col md:gap-3 md:items-start">
         <p className="font-poppins text-[11px] text-black/50">
           @2025 Velvet Alchemy, all rights reserved
         </p>

@@ -42,15 +42,15 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-block bg-black text-white rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-pink hover:text-black cursor-pointer;
+    @apply inline-block bg-black text-white rounded-[40px] px-8 md:px-6 py-[14px] md:py-3 font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-pink hover:text-black cursor-pointer;
   }
 
   .btn-outline {
-    @apply inline-block border border-white text-white rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-white hover:text-black cursor-pointer;
+    @apply inline-block border border-white text-white rounded-[40px] px-8 md:px-6 py-[14px] md:py-3 font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-white hover:text-black cursor-pointer;
   }
 
   .btn-outline-black {
-    @apply inline-block border border-black text-black rounded-[40px] px-8 py-[14px] font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-black hover:text-white cursor-pointer;
+    @apply inline-block border border-black text-black rounded-[40px] px-8 md:px-6 py-[14px] md:py-3 font-poppins text-[11px] tracking-[0.2em] uppercase transition-colors hover:bg-black hover:text-white cursor-pointer;
   }
 
   .section-padding {
@@ -70,6 +70,30 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Responsive section helpers */
+.hero-height { height: 650vh; }
+.meet-section { min-height: 845px; }
+.meet-left { flex: 0 0 54%; }
+.meet-right { flex: 0 0 46%; }
+.hero-marquee-text {
+  font-size: clamp(36px, 10vw, 140px);
+  letter-spacing: 0.3em;
+}
+.overlay-heading {
+  font-size: clamp(24px, 6vw, 65px);
+  letter-spacing: 0.3em;
+}
+.fullwidth-section-height { height: clamp(280px, 55vw, 550px); }
+
+@media (max-width: 768px) {
+  .hero-height { height: 400vh; }
+  .meet-section { min-height: auto; }
+  .meet-left { flex: 1 1 auto; }
+  .meet-right { flex: 1 1 auto; }
+  .hero-marquee-text { letter-spacing: 0.15em; }
+  .overlay-heading { letter-spacing: 0.1em; }
 }
 
 /* Custom scrollbar */
@@ -107,4 +131,10 @@
 
 .animate-gallery-scroll {
   animation: marquee-left 80s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .animate-marquee-left { animation-duration: 60s; }
+  .animate-marquee-right { animation-duration: 20s; }
+  .animate-gallery-scroll { animation-duration: 40s; }
 }

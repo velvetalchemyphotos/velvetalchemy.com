@@ -20,11 +20,11 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
   const next = () => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1))
 
   return (
-    <div className="flex flex-col items-center text-center py-24 px-8">
-      <div className="font-cormorant text-[80px] leading-none text-charcoal mb-4" aria-hidden>
+    <div className="flex flex-col items-center text-center py-24 md:py-14 px-8 md:px-5">
+      <div className="font-cormorant text-[80px] md:text-[50px] leading-none text-charcoal mb-4 md:mb-2" aria-hidden>
         &#8220;
       </div>
-      <div className="min-h-[160px] flex items-center justify-center max-w-3xl">
+      <div className="min-h-[160px] md:min-h-[120px] flex items-center justify-center max-w-3xl">
         <AnimatePresence mode="wait">
           <motion.blockquote
             key={current}
@@ -32,7 +32,7 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4 }}
-            className="font-cormorant italic text-[36px] md:text-[26px] leading-snug text-charcoal"
+            className="font-cormorant italic text-[36px] md:text-[22px] leading-snug text-charcoal"
           >
             &ldquo;{testimonials[current].quote}&rdquo;
           </motion.blockquote>
@@ -53,14 +53,14 @@ export default function TestimonialSlider({ testimonials }: TestimonialSliderPro
       <div className="flex items-center gap-6 mt-10">
         <button
           onClick={prev}
-          className="font-poppins text-[13px] uppercase tracking-[0.2em] text-charcoal hover:text-black transition-colors flex items-center gap-2"
+          className="font-poppins text-[13px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.15em] text-charcoal hover:text-black transition-colors flex items-center gap-2"
         >
           <span>&#8592;</span> Previous
         </button>
-        <div className="w-24 h-px bg-charcoal" />
+        <div className="w-24 md:w-14 h-px bg-charcoal" />
         <button
           onClick={next}
-          className="font-poppins text-[13px] uppercase tracking-[0.2em] text-charcoal hover:text-black transition-colors flex items-center gap-2"
+          className="font-poppins text-[13px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.15em] text-charcoal hover:text-black transition-colors flex items-center gap-2"
         >
           Next <span>&#8594;</span>
         </button>

@@ -40,7 +40,7 @@ export default function Header() {
           {/* Center logo */}
           <Link
             href="/"
-            className="font-mattone text-[22px] uppercase tracking-[0.25em] text-black absolute left-1/2 -translate-x-1/2 whitespace-nowrap"
+            className="font-mattone text-[22px] md:text-[17px] uppercase tracking-[0.25em] md:tracking-[0.15em] text-black absolute left-1/2 -translate-x-1/2 whitespace-nowrap"
           >
             Velvet Alchemy
           </Link>
@@ -60,7 +60,7 @@ export default function Header() {
 
           {/* Hamburger — mobile */}
           <button
-            className="hidden md:flex flex-col gap-1.5 ml-auto"
+            className="hidden md:flex flex-col gap-1.5 ml-auto p-2"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
           >
@@ -84,7 +84,7 @@ export default function Header() {
             className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center gap-8"
           >
             <button
-              className="absolute top-6 right-6 text-white font-poppins text-[11px] uppercase tracking-[0.2em]"
+              className="absolute top-6 right-6 text-white font-poppins text-[13px] uppercase tracking-[0.2em]"
               onClick={() => setMenuOpen(false)}
             >
               Close
@@ -94,7 +94,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="font-poppins text-white text-[11px] uppercase tracking-[0.3em] hover:text-pink transition-colors"
+                className="font-poppins text-white text-[13px] uppercase tracking-[0.25em] hover:text-pink transition-colors"
               >
                 {item.label}
               </Link>
