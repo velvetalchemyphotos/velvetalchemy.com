@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+
+const navLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Experience', href: '/experience-process' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'FAQs', href: '/faqs' },
+  { label: 'Recent Work', href: '/recent-work' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+<header class="fixed top-0 left-0 w-full bg-white z-50">
+  <div class="flex items-center justify-between px-6 py-3">
+    <!-- Logo -->
+    <a href="/" class="shrink-0">
+      <Image
+        src={logo}
+        alt="Velvet Alchemy Photography logo"
+        width={120}
+        height={80}
+        class="h-16 w-auto object-contain"
+        loading="eager"
+      />
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-6">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="font-montserrat text-xs uppercase tracking-widest text-dark-brown hover:underline hover:opacity-80 transition-opacity"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Toggle menu"
+    >
+      <span class="block w-6 h-0.5 bg-dark-brown transition-transform" id="bar1"></span>
+      <span class="block w-6 h-0.5 bg-dark-brown transition-opacity" id="bar2"></span>
+      <span class="block w-6 h-0.5 bg-dark-brown transition-transform" id="bar3"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <nav
+    id="mobile-menu"
+    class="hidden md:hidden absolute right-4 top-full w-[155px] bg-dark-brown text-white py-8 px-6 flex-col gap-4"
+    style="border-radius: 0 0 77.5px 77.5px;"
+  >
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class="block font-montserrat text-xs uppercase tracking-widest text-white/80 hover:text-white transition-colors py-2"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-20 md:h-24"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    if (isOpen) {
+      menu?.classList.add('hidden');
+      menu?.classList.remove('flex');
+    } else {
+      menu?.classList.remove('hidden');
+      menu?.classList.add('flex');
+    }
+  });
+</script>

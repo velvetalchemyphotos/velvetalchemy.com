@@ -1,0 +1,79 @@
+---
+const testimonials = [
+  {
+    text: "A million stars. Beth was absolutely awesome !!! Our photos are an absolute dream come true !!! I couldn't be happier. I wish I lived in the area, I would hire her for every special occasion for the rest of my life.",
+    author: 'Briyanna G',
+  },
+  {
+    text: "It was an absolute pleasure working with Beth! I've had to do a few photo shoots in the past and I must say I felt the most comfortable with Beth. She was able to make me feel at ease and comfortable. She is also very professional and her pictures come out amazing. The best pictures I've taken so far. I would highly recommend Beth to anyone needing a professional photo shoot!!",
+    author: 'Raelara R',
+  },
+  {
+    text: "Beth made our wedding day even more magical with all of her incredible captures! Definitely the most unique and creative photographer I have ever met. Our photos are more than we could have imagined and we look at them everyday to remember our special night. If you are in Vegas looking for a photographer, look no further. She captured all of our moments and beauty in the best way possible.",
+    author: 'Chloe O',
+  },
+  {
+    text: "Honestly, I'm just so incredibly happy with our wedding album! Beth is so talented at what she does and was so fun to work with, she brought us out of our comfort zones and definitely brought my wedding vision to life in photos we will have forever. I cannot thank her enough!! Have already recommended her to friends and family who may want a Vegas wedding in the future!",
+    author: 'Ashley M',
+  },
+];
+---
+<section class="bg-cream py-16 md:py-24 px-6 overflow-hidden">
+  <div class="max-w-3xl mx-auto relative" data-animate="fade">
+    <!-- Carousel container -->
+    <div class="relative overflow-hidden">
+      <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+        {testimonials.map((t, i) => (
+          <div class="w-full shrink-0 px-4 md:px-12" data-testimonial={i}>
+            <blockquote class="text-center">
+              <p class="font-lato font-light italic text-lg md:text-xl leading-relaxed text-dark-brown mb-6">
+                "{t.text}"
+              </p>
+              <cite class="font-montserrat font-semibold text-sm uppercase tracking-wide text-coral not-italic">
+                -{t.author}
+              </cite>
+            </blockquote>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button
+      id="testimonial-prev"
+      class="absolute top-1/2 -translate-y-1/2 left-0 md:-left-6 w-10 h-10 flex items-center justify-center text-dark-brown/50 hover:text-dark-brown transition-colors"
+      aria-label="Previous testimonial"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button
+      id="testimonial-next"
+      class="absolute top-1/2 -translate-y-1/2 right-0 md:-right-6 w-10 h-10 flex items-center justify-center text-dark-brown/50 hover:text-dark-brown transition-colors"
+      aria-label="Next testimonial"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('testimonial-track');
+  const prevBtn = document.getElementById('testimonial-prev');
+  const nextBtn = document.getElementById('testimonial-next');
+  let current = 0;
+  const total = 4;
+
+  function goTo(index: number) {
+    current = ((index % total) + total) % total;
+    if (track) {
+      track.style.transform = `translateX(-${current * 100}%)`;
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => goTo(current - 1));
+  nextBtn?.addEventListener('click', () => goTo(current + 1));
+</script>

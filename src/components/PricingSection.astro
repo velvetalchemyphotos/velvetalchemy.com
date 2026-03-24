@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import filmImg from '../assets/images/pricing/film.jpg';
+import digitalImg from '../assets/images/pricing/digital.jpg';
+import filmDigitalImg from '../assets/images/pricing/film-digital.jpg';
+
+const cards = [
+  { label: 'film', href: '/pricing#film', image: filmImg, alt: "Nat and Glenn's 35mm film wedding gallery preview" },
+  { label: 'digital', href: '/pricing#digital', image: digitalImg, alt: 'Matthew and Yanqin wedding sneak peek' },
+  { label: 'film & digital', href: '/pricing#filmdigital', image: filmDigitalImg, alt: 'Dayse and Fredi wedding sneak peek' },
+];
+---
+<section class="bg-white py-16 md:py-24 px-6 md:px-24" data-animate="fade">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    {cards.map(card => (
+      <a href={card.href} class="group relative block overflow-hidden rounded-sm">
+        <Image
+          src={card.image}
+          alt={card.alt}
+          width={400}
+          height={550}
+          class="w-full h-[400px] md:h-[550px] object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+        <div class="absolute bottom-8 left-0 right-0 text-center">
+          <span class="font-oswald text-lg md:text-xl uppercase tracking-widest text-white">
+            {card.label}
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import processFilm from '../assets/images/process-film.jpg';
+import processDecoration from '../assets/images/process-decoration.png';
+---
+<section class="relative bg-cream overflow-hidden">
+  <div class="flex flex-col md:flex-row min-h-[500px] md:min-h-[772px]">
+    <!-- Left: Image -->
+    <div class="relative w-full md:w-1/2 min-h-[300px] md:min-h-full" data-animate="fade">
+      <Image
+        src={processFilm}
+        alt="Fine art 35mm film wedding photo with dreamy pastel tones"
+        width={840}
+        height={559}
+        class="w-full h-full object-cover"
+      />
+      <Image
+        src={processDecoration}
+        alt=""
+        width={200}
+        height={200}
+        class="absolute top-4 right-4 w-24 md:w-40 opacity-70"
+      />
+    </div>
+
+    <!-- Right: Text -->
+    <div class="relative w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 py-12 md:py-20">
+      <!-- Rotated text elements -->
+      <div class="hidden md:block absolute top-1/2 -translate-y-1/2 left-4 -rotate-90 origin-center">
+        <span class="font-oswald text-xs uppercase tracking-[0.3em] text-dark-brown/30">Process</span>
+      </div>
+      <div class="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 -rotate-90 origin-center">
+        <span class="font-oswald text-xs uppercase tracking-[0.3em] text-dark-brown/30">Experience</span>
+      </div>
+
+      <div data-animate="slide-right">
+        <h2 class="font-oswald text-xs md:text-sm uppercase tracking-[0.2em] text-dark-brown mb-6">
+          My VOWS TO YOU
+        </h2>
+
+        <p class="font-fjalla text-2xl md:text-[34px] uppercase leading-tight mb-8">
+          I promise to work with the characteristics that make you, you
+        </p>
+
+        <!-- Divider -->
+        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
+
+        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-4">
+          A safe and inclusive environment for all
+        </p>
+
+        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
+
+        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-4">
+          True excitement for all of the events of your beautiful day
+        </p>
+
+        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
+
+        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-8">
+          Guidance & support if you feel awkward in front of my lens
+        </p>
+
+        <a
+          href="/experience-process"
+          class="inline-block font-montserrat text-sm uppercase tracking-wide bg-dark-brown text-white px-8 py-3 rounded-[50px] hover:opacity-70 transition-opacity"
+        >
+          what it's like to work with me
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
