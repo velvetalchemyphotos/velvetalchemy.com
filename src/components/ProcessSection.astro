@@ -1,69 +1,86 @@
 ---
 import { Image } from 'astro:assets';
 import processFilm from '../assets/images/process-film.jpg';
-import processDecoration from '../assets/images/process-decoration.png';
 ---
-<section class="relative bg-cream overflow-hidden">
-  <div class="flex flex-col md:flex-row min-h-[500px] md:min-h-[772px]">
-    <!-- Left: Image -->
-    <div class="relative w-full md:w-1/2 min-h-[300px] md:min-h-full" data-animate="fade">
-      <Image
-        src={processFilm}
-        alt="Fine art 35mm film wedding photo with dreamy pastel tones"
-        width={840}
-        height={559}
-        class="w-full h-full object-cover"
-      />
-      <Image
-        src={processDecoration}
-        alt=""
-        width={200}
-        height={200}
-        class="absolute top-4 right-4 w-24 md:w-40 opacity-70"
-      />
+<section class="relative bg-black overflow-hidden min-h-[600px] md:min-h-[900px]">
+  <div class="relative w-full min-h-[600px] md:min-h-[900px]">
+
+    <!-- Film-strip wedding photo with polaroid/film border -->
+    <div class="relative md:absolute md:left-[5%] md:top-0 z-10 w-full md:w-[60%]" data-animate="fade">
+      <div class="relative bg-[#1a1a18]">
+        <!-- Film strip top border -->
+        <div class="flex items-center justify-between px-4 py-1 bg-[#1a1a18] text-[#8a8a7a] font-mono text-[10px] tracking-wider">
+          <div class="flex items-center gap-6">
+            <span>49</span>
+            <span class="text-[8px]">▶</span>
+            <span class="uppercase tracking-widest">Kodak Portra 400BW</span>
+          </div>
+          <div class="flex items-center gap-6">
+            <span>50</span>
+            <span class="text-[8px]">▶</span>
+            <span class="uppercase tracking-widest">Kodak Por</span>
+          </div>
+        </div>
+        <!-- Photo -->
+        <div class="border-x-[3px] border-[#1a1a18]">
+          <Image
+            src={processFilm}
+            alt="Fine art 35mm film wedding photo"
+            width={1000}
+            height={665}
+            class="w-full h-auto object-cover"
+          />
+        </div>
+        <!-- Film strip bottom border -->
+        <div class="flex items-center px-4 py-1 bg-[#1a1a18] text-[#8a8a7a] font-mono text-[10px]">
+          <span class="text-[8px]">▶</span>
+          <span class="ml-4">8</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Right: Text -->
-    <div class="relative w-full md:w-1/2 flex flex-col justify-center px-8 md:px-16 py-12 md:py-20">
-      <!-- Rotated text elements -->
-      <div class="hidden md:block absolute top-1/2 -translate-y-1/2 left-4 -rotate-90 origin-center">
-        <span class="font-oswald text-xs uppercase tracking-[0.3em] text-dark-brown/30">Process</span>
+    <!-- Huge rotated "MY VOWS TO YOU" text — right side, duplicated/layered effect -->
+    <div class="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] items-center justify-center overflow-hidden">
+      <!-- Back layer — deep red -->
+      <div class="absolute text-deep-red font-fjalla uppercase leading-[0.85] text-[180px] tracking-tight" style="writing-mode: vertical-rl; text-orientation: mixed; transform: translate(15px, 10px);">
+        MY VOWS TO YOU
       </div>
-      <div class="hidden md:block absolute top-1/2 -translate-y-1/2 right-4 -rotate-90 origin-center">
-        <span class="font-oswald text-xs uppercase tracking-[0.3em] text-dark-brown/30">Experience</span>
+      <!-- Front layer — bright red -->
+      <div class="text-bright-red font-fjalla uppercase leading-[0.85] text-[180px] tracking-tight" style="writing-mode: vertical-rl; text-orientation: mixed;">
+        MY VOWS TO YOU
       </div>
+    </div>
 
-      <div data-animate="slide-right">
-        <h2 class="font-oswald text-xs md:text-sm uppercase tracking-[0.2em] text-dark-brown mb-6">
-          My VOWS TO YOU
-        </h2>
+    <!-- Mobile: show text normally -->
+    <div class="md:hidden text-center py-8">
+      <span class="text-bright-red font-fjalla uppercase text-5xl leading-none">MY VOWS TO YOU</span>
+    </div>
 
-        <p class="font-fjalla text-2xl md:text-[34px] uppercase leading-tight mb-8">
-          I promise to work with the characteristics that make you, you
-        </p>
+    <!-- Promise text — bottom left, with spacing from film image -->
+    <div class="relative md:absolute md:bottom-12 md:left-[5%] z-20 px-6 md:px-0 pb-12 md:pb-0 md:w-[45%] mt-8 md:mt-0">
+      <p class="font-oswald font-light text-base md:text-lg text-coral-light leading-relaxed mb-1">
+        A safe and inclusive environment for all
+      </p>
+      <div class="w-full h-px bg-coral-light/40 mb-3"></div>
 
-        <!-- Divider -->
-        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
+      <p class="font-oswald font-light text-base md:text-lg text-coral-light leading-relaxed mb-1">
+        True excitement for all of the events of your beautiful day
+      </p>
+      <div class="w-full h-px bg-coral-light/40 mb-3"></div>
 
-        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-4">
-          A safe and inclusive environment for all
-        </p>
+      <p class="font-oswald font-light text-base md:text-lg text-coral-light leading-relaxed mb-1">
+        Guidance & support if you feel awkward in front of my lens
+      </p>
+      <div class="w-full h-px bg-coral-light/40 mb-3"></div>
 
-        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
+      <p class="font-oswald font-light text-base md:text-lg text-coral-light leading-relaxed mb-8">
+        I promise to work with the characteristics that make you, you
+      </p>
 
-        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-4">
-          True excitement for all of the events of your beautiful day
-        </p>
-
-        <svg class="w-full h-[2px] mb-6" viewBox="0 0 400 2"><line x1="0" y1="1" x2="400" y2="1" stroke="#EA6C5D" stroke-width="1" /></svg>
-
-        <p class="font-oswald font-light text-base md:text-[22px] leading-relaxed mb-8">
-          Guidance & support if you feel awkward in front of my lens
-        </p>
-
+      <div class="text-center">
         <a
           href="/experience-process"
-          class="inline-block font-montserrat text-sm uppercase tracking-wide bg-dark-brown text-white px-8 py-3 rounded-[50px] hover:opacity-70 transition-opacity"
+          class="inline-block font-montserrat text-sm tracking-wide text-coral-light border border-coral-light/60 px-10 py-3 rounded-[50px] hover:bg-coral-light/10 transition-colors"
         >
           what it's like to work with me
         </a>

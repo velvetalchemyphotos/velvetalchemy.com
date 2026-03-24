@@ -2,50 +2,79 @@
 import { Image } from 'astro:assets';
 import logo from '../assets/images/logo.png';
 
-const navLinks = [
+const leftLinks = [
   { label: 'About', href: '/about' },
   { label: 'Experience', href: '/experience-process' },
   { label: 'Pricing', href: '/pricing' },
+];
+
+const rightLinks = [
   { label: 'FAQs', href: '/faqs' },
   { label: 'Recent Work', href: '/recent-work' },
   { label: 'Contact', href: '/contact' },
 ];
----
-<header class="fixed top-0 left-0 w-full bg-white z-50">
-  <div class="flex items-center justify-between px-6 py-3">
-    <!-- Logo -->
-    <a href="/" class="shrink-0">
-      <Image
-        src={logo}
-        alt="Velvet Alchemy Photography logo"
-        width={120}
-        height={80}
-        class="h-16 w-auto object-contain"
-        loading="eager"
-      />
-    </a>
 
-    <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-6">
-      {navLinks.map(link => (
+const allLinks = [...leftLinks, ...rightLinks];
+---
+<header class="absolute top-0 left-0 w-full z-50">
+  <div class="hidden md:flex items-center justify-between py-4 px-8 w-full">
+    <!-- Left nav links -->
+    <nav class="flex items-center gap-10">
+      {leftLinks.map(link => (
         <a
           href={link.href}
-          class="font-montserrat text-xs uppercase tracking-widest text-dark-brown hover:underline hover:opacity-80 transition-opacity"
+          class="font-fjalla text-[18px] uppercase text-dark-brown hover:underline hover:opacity-80 transition-opacity"
         >
           {link.label}
         </a>
       ))}
     </nav>
 
-    <!-- Mobile Hamburger -->
+    <!-- Centered Logo -->
+    <a href="/" class="shrink-0 mx-8">
+      <Image
+        src={logo}
+        alt="Velvet Alchemy Photography logo"
+        width={295}
+        height={74}
+        class="h-[74px] w-auto object-contain"
+        loading="eager"
+      />
+    </a>
+
+    <!-- Right nav links -->
+    <nav class="flex items-center gap-10">
+      {rightLinks.map(link => (
+        <a
+          href={link.href}
+          class="font-fjalla text-[18px] uppercase text-dark-brown hover:underline hover:opacity-80 transition-opacity"
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <!-- Mobile Header -->
+  <div class="flex md:hidden items-center justify-between px-4 py-3">
+    <a href="/" class="shrink-0">
+      <Image
+        src={logo}
+        alt="Velvet Alchemy Photography logo"
+        width={100}
+        height={100}
+        class="h-12 w-auto object-contain"
+        loading="eager"
+      />
+    </a>
     <button
       id="mobile-menu-btn"
-      class="md:hidden flex flex-col gap-1.5 p-2"
+      class="flex flex-col gap-1.5 p-2"
       aria-label="Toggle menu"
     >
-      <span class="block w-6 h-0.5 bg-dark-brown transition-transform" id="bar1"></span>
-      <span class="block w-6 h-0.5 bg-dark-brown transition-opacity" id="bar2"></span>
-      <span class="block w-6 h-0.5 bg-dark-brown transition-transform" id="bar3"></span>
+      <span class="block w-6 h-0.5 bg-dark-brown transition-transform"></span>
+      <span class="block w-6 h-0.5 bg-dark-brown transition-opacity"></span>
+      <span class="block w-6 h-0.5 bg-dark-brown transition-transform"></span>
     </button>
   </div>
 
@@ -55,7 +84,7 @@ const navLinks = [
     class="hidden md:hidden absolute right-4 top-full w-[155px] bg-dark-brown text-white py-8 px-6 flex-col gap-4"
     style="border-radius: 0 0 77.5px 77.5px;"
   >
-    {navLinks.map(link => (
+    {allLinks.map(link => (
       <a
         href={link.href}
         class="block font-montserrat text-xs uppercase tracking-widest text-white/80 hover:text-white transition-colors py-2"
@@ -65,9 +94,6 @@ const navLinks = [
     ))}
   </nav>
 </header>
-
-<!-- Spacer for fixed header -->
-<div class="h-20 md:h-24"></div>
 
 <script>
   const btn = document.getElementById('mobile-menu-btn');

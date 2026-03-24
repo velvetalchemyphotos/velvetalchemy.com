@@ -1,47 +1,47 @@
 ---
 import { Image } from 'astro:assets';
-import aboutFrame from '../assets/images/about-frame.jpg';
 import aboutHeadshot from '../assets/images/about-headshot.jpg';
 ---
 <section class="bg-white py-16 md:py-24 px-6 md:px-24 overflow-hidden">
-  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20 max-w-6xl mx-auto">
-    <!-- Images -->
-    <div class="relative w-full md:w-1/2 min-h-[350px] md:min-h-[550px]" data-animate="slide-left">
+  <div class="flex flex-col md:flex-row items-start gap-12 md:gap-20 max-w-6xl mx-auto">
+    <!-- Single film-strip bordered photo -->
+    <div class="w-full md:w-[45%] shrink-0" data-animate="slide-left">
       <div class="relative">
-        <Image
-          src={aboutFrame}
-          alt="Decorative frame"
-          width={526}
-          height={400}
-          class="w-full md:w-[526px] rounded-sm"
-        />
+        <!-- Film strip markings on left edge -->
+        <div class="absolute left-0 top-0 bottom-0 w-6 bg-dark-brown/80 z-10 flex flex-col justify-between py-4 items-center">
+          <span class="text-white/60 text-[8px] font-mono rotate-[-90deg] whitespace-nowrap">KODAK PORTRA 400</span>
+          <span class="text-white/60 text-[10px] font-mono">43</span>
+        </div>
         <Image
           src={aboutHeadshot}
           alt="Beth, Las Vegas fine art wedding photographer and founder of Velvet Alchemy"
-          width={467}
-          height={500}
-          class="absolute top-0 left-4 md:left-8 w-[85%] md:w-[467px] rounded-sm shadow-lg"
+          width={526}
+          height={600}
+          class="w-full h-auto object-cover"
         />
       </div>
     </div>
 
     <!-- Text -->
-    <div class="w-full md:w-1/2" data-animate="fade">
-      <h2 class="font-slight text-5xl md:text-[80px] leading-[1.5] text-dark-brown mb-6">
-        Hey, call me B.
+    <div class="w-full md:w-[55%]" data-animate="fade">
+      <h2 class="font-slight text-5xl md:text-[80px] leading-[1.2] text-dark-brown mb-8">
+        Hey, call<br />me B.
       </h2>
 
-      <p class="font-lato font-light text-lg leading-[1.8] text-dark-brown mb-6">
+      <p class="font-lato font-light text-lg leading-[1.8] text-coral-light/80 mb-6">
         My name is Beth. I absolutely love to capture the chemistry on a golden desert day. My favorite type of images are those that are non-posed, natural, and reflect the vibe of those I'm photographing. I'm often approached for my creative and easy-going style.
       </p>
 
-      <p class="font-lato font-light text-lg leading-[1.8] text-dark-brown mb-8">
-        I've been told I'm pretty stellar. I can't wait to meet you.
+      <p class="font-lato font-light text-lg leading-[1.8] text-coral-light/80 mb-2">
+        I've been told I'm pretty stellar.
+      </p>
+      <p class="font-lato font-light text-lg leading-[1.8] text-coral-light/80 mb-8">
+        I can't wait to meet you.
       </p>
 
       <a
         href="/about"
-        class="inline-block font-montserrat text-sm uppercase tracking-wide bg-dark-brown text-white px-8 py-3 rounded-[50px] hover:opacity-70 transition-opacity"
+        class="inline-block font-montserrat text-sm font-semibold tracking-wide text-coral border border-coral/50 px-10 py-3 rounded-[50px] hover:bg-coral/10 transition-colors"
       >
         click here 4 more about me &lt;3
       </a>

@@ -1,23 +1,102 @@
 ---
+import { Image } from 'astro:assets';
+import portfolioBg from '../assets/images/portfolio-bg.jpg';
+
+const testimonials = [
+  {
+    text: "A million stars. Beth was absolutely awesome !!! Our photos are an absolute dream come true !!! I couldn't be happier. I wish I lived in the area, I would hire her for every special occasion for the rest of my life.",
+    author: 'Briyanna G',
+  },
+  {
+    text: "It was an absolute pleasure working with Beth! I've had to do a few photo shoots in the past and I must say I felt the most comfortable with Beth. She was able to make me feel at ease and comfortable. She is also very professional and her pictures come out amazing.",
+    author: 'Raelara R',
+  },
+  {
+    text: "Beth made our wedding day even more magical with all of her incredible captures! Definitely the most unique and creative photographer I have ever met. Our photos are more than we could have imagined and we look at them everyday to remember our special night.",
+    author: 'Chloe O',
+  },
+  {
+    text: "Honestly, I'm just so incredibly happy with our wedding album! Beth is so talented at what she does and was so fun to work with, she brought us out of our comfort zones and definitely brought my wedding vision to life in photos we will have forever.",
+    author: 'Ashley M',
+  },
+];
 ---
-<section class="bg-cream-light py-16 md:py-20 px-6 text-center">
-  <div class="max-w-2xl mx-auto" data-animate="fade">
-    <p class="font-oswald font-light text-xl md:text-2xl text-dark-brown mb-6">
-      Have a question? Check out my
-    </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a
-        href="/contact"
-        class="font-montserrat text-sm uppercase tracking-wide bg-dark-brown text-white px-8 py-3 rounded-[50px] hover:opacity-70 transition-opacity"
-      >
-        ask me anything
-      </a>
-      <a
-        href="/faqs"
-        class="font-fjalla text-2xl md:text-3xl uppercase text-coral hover:text-deep-red transition-colors"
-      >
-        FAQS.
+<section class="relative overflow-hidden min-h-[500px] md:min-h-[600px]">
+  <!-- Background image -->
+  <div class="absolute inset-0">
+    <Image
+      src={portfolioBg}
+      alt="Wedding photography"
+      width={1200}
+      height={800}
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/10"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex flex-col md:flex-row items-start justify-between px-6 md:px-16 py-16 md:py-20 min-h-[500px] md:min-h-[600px]">
+    <!-- Left: FAQ text -->
+    <div class="w-full md:w-[45%] mb-12 md:mb-0">
+      <h2 class="font-fjalla text-4xl md:text-[80px] leading-[0.95] text-coral uppercase mb-4">
+        Have a<br />question?<br />Check out<br />my <span class="text-coral">FAQS.</span>
+      </h2>
+    </div>
+
+    <!-- Right: Testimonial card + ask me anything -->
+    <div class="w-full md:w-[45%] flex flex-col items-end">
+      <!-- Testimonial card -->
+      <div class="relative w-full max-w-md mb-8">
+        <div class="bg-cream-light/90 rounded-2xl px-8 py-6 text-center">
+          <div id="faq-testimonial-track" class="overflow-hidden">
+            <div id="faq-testimonial-inner" class="flex transition-transform duration-500">
+              {testimonials.map((t, i) => (
+                <div class="w-full shrink-0 px-2" data-faq-testimonial={i}>
+                  <p class="font-oswald font-light text-xs md:text-sm uppercase tracking-wide leading-relaxed text-coral mb-3">
+                    {t.text}
+                  </p>
+                  <p class="font-oswald font-light text-xs uppercase tracking-wide text-coral/70">
+                    -{t.author}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Nav arrows -->
+        <button id="faq-prev" class="absolute top-1/2 -translate-y-1/2 -left-8 md:-left-12 text-coral text-4xl md:text-5xl hover:text-deep-red transition-colors" aria-label="Previous testimonial">
+          ‹
+        </button>
+        <button id="faq-next" class="absolute top-1/2 -translate-y-1/2 -right-8 md:-right-12 text-coral text-4xl md:text-5xl hover:text-deep-red transition-colors" aria-label="Next testimonial">
+          ›
+        </button>
+      </div>
+
+      <!-- Ask me anything -->
+      <a href="/contact" class="block">
+        <span class="font-slight text-4xl md:text-[80px] leading-none text-slate-blue">
+          ask me<br />anything
+        </span>
       </a>
     </div>
   </div>
 </section>
+
+<script>
+  const track = document.getElementById('faq-testimonial-inner');
+  const prevBtn = document.getElementById('faq-prev');
+  const nextBtn = document.getElementById('faq-next');
+  let current = 0;
+  const total = 4;
+
+  function goTo(index: number) {
+    current = ((index % total) + total) % total;
+    if (track) {
+      track.style.transform = `translateX(-${current * 100}%)`;
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => goTo(current - 1));
+  nextBtn?.addEventListener('click', () => goTo(current + 1));
+</script>
