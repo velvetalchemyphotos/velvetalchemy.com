@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Lato:wght@300&family=Montserrat:wght@400;600&family=Oswald:wght@300;700&display=swap');
+
+@theme {
+  /* Colors */
+  --color-cream: #DFDEDA;
+  --color-cream-light: #EBE6DA;
+  --color-dark-brown: #2B2A28;
+  --color-coral: #CD3F2F;
+  --color-coral-light: #EA6C5D;
+  --color-deep-red: #AD1100;
+  --color-bright-red: #FF1900;
+  --color-slate-blue: #A2C0C7;
+
+  /* Font families */
+  --font-fjalla: "Fjalla One", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-oswald: "Oswald", sans-serif;
+  --font-lato: "Lato", sans-serif;
+  --font-mergian: "mergian reg", serif;
+  --font-mergian-slant: "mergian slant", serif;
+  --font-slight: "slightregularwebfont", serif;
+
+  /* Animations */
+  --animate-slide-in-left: slide-in-left 0.5s ease-out forwards;
+  --animate-slide-in-right: slide-in-right 0.5s ease-out forwards;
+  --animate-fade-in: fade-in 0.75s ease-out forwards;
+
+  @keyframes slide-in-left {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slide-in-right {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+}
+
+/* Custom font faces */
+@font-face {
+  font-family: 'mergian reg';
+  src: url('/fonts/mergian-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'mergian slant';
+  src: url('/fonts/mergian-slant.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'slightregularwebfont';
+  src: url('/fonts/slight-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-lato);
+  font-weight: 300;
+  color: var(--color-dark-brown);
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Scroll animation base */
+[data-animate] {
+  opacity: 0;
+}
+
+[data-animate].in-view {
+  opacity: 1;
+}
+
+[data-animate="slide-left"].in-view {
+  animation: slide-in-left 0.5s ease-out forwards;
+}
+
+[data-animate="slide-right"].in-view {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
+[data-animate="fade"].in-view {
+  animation: fade-in 0.75s ease-out forwards;
+}
