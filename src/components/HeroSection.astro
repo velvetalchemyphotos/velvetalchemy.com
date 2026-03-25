@@ -105,12 +105,6 @@ import gallery3 from '../assets/images/hero/gallery-3.jpg';
           data-index="2"
         />
       </div>
-      <!-- Carousel nav dots -->
-      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        <button class="hero-dot w-2 h-2 rounded-full bg-white transition-opacity opacity-100" data-index="0" aria-label="Slide 1"></button>
-        <button class="hero-dot w-2 h-2 rounded-full bg-white transition-opacity opacity-50" data-index="1" aria-label="Slide 2"></button>
-        <button class="hero-dot w-2 h-2 rounded-full bg-white transition-opacity opacity-50" data-index="2" aria-label="Slide 3"></button>
-      </div>
     </div>
     </div>
   </div>
@@ -121,26 +115,14 @@ import gallery3 from '../assets/images/hero/gallery-3.jpg';
   let currentSlide = 0;
   const totalSlides = 3;
   const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.hero-dot');
 
   function goToSlide(index: number) {
     slides.forEach(slide => {
       const slideIndex = parseInt((slide as HTMLElement).dataset.index || '0');
       (slide as HTMLElement).style.opacity = slideIndex === index ? '1' : '0';
     });
-    dots.forEach(dot => {
-      const dotIndex = parseInt((dot as HTMLElement).dataset.index || '0');
-      (dot as HTMLElement).style.opacity = dotIndex === index ? '1' : '0.5';
-    });
     currentSlide = index;
   }
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const index = parseInt((dot as HTMLElement).dataset.index || '0');
-      goToSlide(index);
-    });
-  });
 
   setInterval(() => {
     goToSlide((currentSlide + 1) % totalSlides);
