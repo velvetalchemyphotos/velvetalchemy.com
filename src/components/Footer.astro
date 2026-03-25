@@ -12,22 +12,22 @@ const rightLinks = [
 ];
 ---
 <footer class="bg-black py-12 md:py-16 px-6">
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
+  <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
     <!-- Left nav -->
     <nav class="flex flex-col gap-2 text-center md:text-left">
       {leftLinks.map(link => (
         <a
           href={link.href}
-          class="font-fjalla text-sm md:text-base uppercase text-coral-light hover:text-coral transition-colors"
+          class="font-mergian text-lg md:text-[30px] md:leading-snug uppercase text-coral hover:text-coral-light transition-colors"
         >
           {link.label}
         </a>
       ))}
     </nav>
 
-    <!-- Center brand -->
+    <!-- Brand — centered -->
     <div class="text-center">
-      <h2 class="font-mergian-slant text-3xl md:text-[40px] text-coral-light italic">
+      <h2 class="font-slight text-3xl md:text-[40px] text-coral">
         Velvet Alchemy<br />Photos
       </h2>
     </div>
@@ -37,7 +37,7 @@ const rightLinks = [
       {rightLinks.map(link => (
         <a
           href={link.href}
-          class="font-fjalla text-sm md:text-base uppercase text-coral-light hover:text-coral transition-colors"
+          class="font-mergian text-lg md:text-[30px] md:leading-snug uppercase text-coral hover:text-coral-light transition-colors"
         >
           {link.label}
         </a>

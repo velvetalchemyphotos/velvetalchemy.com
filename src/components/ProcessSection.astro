@@ -2,11 +2,15 @@
 import { Image } from 'astro:assets';
 import processFilm from '../assets/images/process-film.jpg';
 ---
-<section class="relative bg-black overflow-hidden min-h-[600px] md:min-h-[900px]">
-  <div class="relative w-full min-h-[600px] md:min-h-[900px]">
+<section class="relative overflow-visible min-h-[600px] md:min-h-[1000px] md:-mt-[200px] z-20">
+  <!-- Black background — starts 200px from top to allow hero to show through -->
+  <div class="hidden md:block absolute left-0 right-0 top-[200px] bottom-0 bg-black"></div>
+  <div class="md:hidden absolute inset-0 bg-black"></div>
 
-    <!-- Film-strip wedding photo with polaroid/film border -->
-    <div class="relative md:absolute md:left-[5%] md:top-0 z-10 w-full md:w-[60%]" data-animate="fade">
+  <div class="relative w-full min-h-[600px] md:min-h-[1000px] max-w-[1200px] mx-auto">
+
+    <!-- Film-strip wedding photo — large, left-aligned, ~70% width -->
+    <div class="relative md:absolute md:left-[4%] md:top-0 z-30 w-full md:w-[70%]" data-animate="fade">
       <div class="relative bg-[#1a1a18]">
         <!-- Film strip top border -->
         <div class="flex items-center justify-between px-4 py-1 bg-[#1a1a18] text-[#8a8a7a] font-mono text-[10px] tracking-wider">
@@ -39,16 +43,24 @@ import processFilm from '../assets/images/process-film.jpg';
       </div>
     </div>
 
-    <!-- Huge rotated "MY VOWS TO YOU" text — right side, duplicated/layered effect -->
-    <div class="hidden md:flex absolute right-0 top-0 bottom-0 w-[45%] items-center justify-center overflow-hidden">
-      <!-- Back layer — deep red -->
-      <div class="absolute text-deep-red font-fjalla uppercase leading-[0.85] text-[180px] tracking-tight" style="writing-mode: vertical-rl; text-orientation: mixed; transform: translate(15px, 10px);">
-        MY VOWS TO YOU
-      </div>
-      <!-- Front layer — bright red -->
-      <div class="text-bright-red font-fjalla uppercase leading-[0.85] text-[180px] tracking-tight" style="writing-mode: vertical-rl; text-orientation: mixed;">
-        MY VOWS TO YOU
-      </div>
+    <!-- "MY VOWS TO YOU" text — two overlapping rotated layers -->
+    <!-- Back layer — deep red -->
+    <div class="hidden md:block absolute z-40" style="top: 230px; left: 68%; transform: rotate(90deg); transform-origin: top left;">
+      <p class="font-fjalla uppercase text-[154px] leading-[0.85] tracking-tight whitespace-nowrap" style="color: rgb(173, 17, 0);">
+        MY VOWS
+      </p>
+      <p class="font-fjalla uppercase text-[154px] leading-[0.85] tracking-tight whitespace-nowrap" style="color: rgb(173, 17, 0);">
+        TO YOU
+      </p>
+    </div>
+    <!-- Front layer — bright red -->
+    <div class="hidden md:block absolute z-40" style="top: 230px; left: 88%; transform: rotate(90deg); transform-origin: top left;">
+      <p class="font-fjalla uppercase text-[154px] leading-[0.85] tracking-tight whitespace-nowrap" style="color: rgb(255, 25, 0);">
+        MY VOWS
+      </p>
+      <p class="font-fjalla uppercase text-[154px] leading-[0.85] tracking-tight whitespace-nowrap" style="color: rgb(255, 25, 0);">
+        TO YOU
+      </p>
     </div>
 
     <!-- Mobile: show text normally -->
@@ -56,8 +68,8 @@ import processFilm from '../assets/images/process-film.jpg';
       <span class="text-bright-red font-fjalla uppercase text-5xl leading-none">MY VOWS TO YOU</span>
     </div>
 
-    <!-- Promise text — bottom left, with spacing from film image -->
-    <div class="relative md:absolute md:bottom-12 md:left-[5%] z-20 px-6 md:px-0 pb-12 md:pb-0 md:w-[45%] mt-8 md:mt-0">
+    <!-- Promise text — left-aligned below image -->
+    <div class="relative md:absolute md:bottom-12 md:left-[4%] z-20 px-6 md:px-0 pb-12 md:pb-0 md:w-[55%] mt-8 md:mt-0">
       <p class="font-oswald font-light text-base md:text-lg text-coral-light leading-relaxed mb-1">
         A safe and inclusive environment for all
       </p>

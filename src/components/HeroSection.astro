@@ -26,7 +26,7 @@ import gallery3 from '../assets/images/hero/gallery-3.jpg';
     >
       Contrast &<br />dreamy pastels<br />in full motley
     </h1>
-    <div class="relative w-[200px] h-[310px] rounded-full overflow-hidden">
+    <div class="relative w-[200px] h-[310px] rounded-[50%] overflow-hidden">
       <div class="hero-carousel relative w-full h-full">
         <Image
           src={gallery1}
@@ -61,18 +61,21 @@ import gallery3 from '../assets/images/hero/gallery-3.jpg';
 
   <!-- Desktop layout — absolute positioned elements -->
   <div class="relative z-10 hidden md:block min-h-[1003px]">
-    <!-- Heading — bottom-left area -->
-    <div class="absolute left-[100px] bottom-[180px] w-[625px] z-10" data-animate="slide-left">
-      <h1
-        class="font-fjalla text-[102px] leading-none text-black"
-        style="text-shadow: 2px 2px 5px rgba(0,0,0,0.36);"
-      >
-        Contrast &<br />dreamy pastels<br />in full motley
-      </h1>
+    <!-- Heading — center-left, right-aligned text -->
+    <div class="absolute inset-0 flex items-center z-10 max-w-[1200px] mx-auto left-0 right-0" data-animate="slide-left">
+      <div class="w-[625px] ml-[8%]">
+        <h1
+          class="font-fjalla text-[102px] leading-none text-black text-right"
+          style="text-shadow: 2px 2px 5px rgba(0,0,0,0.36);"
+        >
+          Contrast &<br />dreamy pastels<br />in full motley
+        </h1>
+      </div>
     </div>
 
-    <!-- Carousel — right side -->
-    <div class="absolute right-[60px] top-1/2 -translate-y-1/2 w-[423px] h-[658px] rounded-full overflow-hidden">
+    <!-- Carousel — right side, overlapping with heading -->
+    <div class="absolute right-0 left-0 mx-auto max-w-[1200px] top-0 bottom-0 pointer-events-none">
+      <div class="absolute right-[5%] top-[65%] -translate-y-1/2 w-[423px] h-[658px] rounded-[50%] overflow-hidden pointer-events-auto">
       <div class="hero-carousel relative w-full h-full">
         <Image
           src={gallery1}
@@ -108,6 +111,7 @@ import gallery3 from '../assets/images/hero/gallery-3.jpg';
         <button class="hero-dot w-2 h-2 rounded-full bg-white transition-opacity opacity-50" data-index="1" aria-label="Slide 2"></button>
         <button class="hero-dot w-2 h-2 rounded-full bg-white transition-opacity opacity-50" data-index="2" aria-label="Slide 3"></button>
       </div>
+    </div>
     </div>
   </div>
 </section>
